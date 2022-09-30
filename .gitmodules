@@ -1,0 +1,3 @@
+[submodule "URLSHortenerFRONT"]
+    path = URLSHortenerFRONT
+    url = git@github.com:ksslutsk/URLShortenerFront.git
