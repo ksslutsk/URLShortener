@@ -37,7 +37,7 @@ namespace URLShortenerBACK.Controllers
         [HttpPost]
         public async Task<URL> CreateShortURL(URLDTO urldto)
         {
-            var res = await _urlService.AddNewUrl(urldto.Url);
+            var res = await _urlService.AddNewUrl(urldto.Url, urldto.Creator);
             return res;
         }
         [HttpDelete("{id}")]

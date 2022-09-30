@@ -18,9 +18,9 @@ namespace URLShortenerBACK.Sevices
             var urls = this._context.URLs;
             return urls;
         }
-        public async Task<URL> AddNewUrl(string url)
+        public async Task<URL> AddNewUrl(string url, long userId)
         {
-            URL model = GenURLModel(url);
+            URL model = GenURLModel(url, userId);
             var res = await _context.URLs.FindAsync(model.ID);
             if (res == null)
             {
@@ -30,7 +30,7 @@ namespace URLShortenerBACK.Sevices
             }
             return res;
         }
-        private URL GenURLModel(string url)
+        private URL GenURLModel(string url, long userId)
         {
             var hashids = new Hashids(url);
             var id = hashids.Encode(1, 2, 3);
@@ -38,6 +38,8 @@ namespace URLShortenerBACK.Sevices
 
             model.LongURL = url;
             model.ShortURL = id;
+            model.CreatedOn = DateTime.Now;
+            model.CreatedBy = userId;
             return model;
         }
         public async Task<URL?> DeleteURL(long id)
